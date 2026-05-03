@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML Surprise Test - 3</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #111;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(150, 126, 82, 0.09), transparent 24rem),
+        radial-gradient(circle at 88% 72%, rgba(17, 17, 17, 0.055), transparent 20rem),
+        #f8f6f1;
+      overflow: hidden;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 760px);
+      text-align: center;
+    }
+
+    .language-art {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .glyph {
+      position: absolute;
+      pointer-events: auto;
+      color: rgba(17, 17, 17, 0.095);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      transform: translate3d(0, 0, 0) rotate(var(--rotate));
+      user-select: none;
+      animation: drift 14s ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+      transition: color 420ms ease, opacity 420ms ease;
+    }
+
+    .glyph:nth-child(1) {
+      top: 7%;
+      left: 7%;
+      font-size: clamp(5rem, 13vw, 11rem);
+      --rotate: -12deg;
+      --delay: -3s;
+    }
+
+    .glyph:nth-child(2) {
+      top: 13%;
+      right: 8%;
+      font-size: clamp(3.8rem, 10vw, 8rem);
+      --rotate: 10deg;
+      --delay: -11s;
+    }
+
+    .glyph:nth-child(3) {
+      bottom: 9%;
+      left: 11%;
+      font-size: clamp(4rem, 11vw, 9rem);
+      --rotate: 8deg;
+      --delay: -17s;
+    }
+
+    .glyph:nth-child(4) {
+      right: 11%;
+      bottom: 10%;
+      color: rgba(140, 113, 62, 0.12);
+      font-size: clamp(5rem, 14vw, 12rem);
+      --rotate: -9deg;
+      --delay: -7s;
+    }
+
+    .glyph:nth-child(5) {
+      top: 47%;
+      left: -1%;
+      color: rgba(140, 113, 62, 0.095);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      --rotate: -90deg;
+      --delay: -13s;
+    }
+
+    .glyph:nth-child(6) {
+      top: 44%;
+      right: -2%;
+      color: rgba(17, 17, 17, 0.08);
+      font-size: clamp(3.6rem, 8vw, 7rem);
+      --rotate: 90deg;
+      --delay: -5s;
+    }
+
+    .glyph:nth-child(7) {
+      top: 31%;
+      left: 18%;
+      color: rgba(17, 17, 17, 0.07);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      --rotate: -20deg;
+      --delay: -19s;
+    }
+
+    .glyph:nth-child(8) {
+      top: 29%;
+      right: 23%;
+      color: rgba(140, 113, 62, 0.09);
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      --rotate: 17deg;
+      --delay: -9s;
+    }
+
+    .glyph:nth-child(9) {
+      left: 29%;
+      bottom: 24%;
+      color: rgba(17, 17, 17, 0.075);
+      font-size: clamp(2.7rem, 6vw, 5.4rem);
+      --rotate: 13deg;
+      --delay: -15s;
+    }
+
+    .glyph:nth-child(10) {
+      right: 30%;
+      bottom: 27%;
+      color: rgba(140, 113, 62, 0.085);
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      --rotate: -16deg;
+      --delay: -4s;
+    }
+
+    .glyph:nth-child(11) {
+      top: 61%;
+      left: 6%;
+      color: rgba(17, 17, 17, 0.075);
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      --rotate: 14deg;
+      --delay: -21s;
+    }
+
+    .glyph:nth-child(12) {
+      top: 60%;
+      right: 7%;
+      color: rgba(140, 113, 62, 0.09);
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      --rotate: -13deg;
+      --delay: -12s;
+    }
+
+    .glyph:nth-child(13) {
+      top: 4%;
+      left: 43%;
+      color: rgba(17, 17, 17, 0.07);
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      --rotate: 8deg;
+      --delay: -6s;
+    }
+
+    .glyph:nth-child(14) {
+      left: 47%;
+      bottom: 5%;
+      color: rgba(140, 113, 62, 0.09);
+      font-size: clamp(2rem, 4vw, 4rem);
+      --rotate: -6deg;
+      --delay: -18s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(-10px, 7px, 0) rotate(calc(var(--rotate) - 1.5deg));
+      }
+
+      to {
+        transform: translate3d(12px, -9px, 0) rotate(calc(var(--rotate) + 1.5deg));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glyph {
+        animation: none;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .glyph:nth-child(3n + 1):hover {
+        color: rgba(197, 123, 118, 0.22);
+      }
+
+      .glyph:nth-child(3n + 2):hover {
+        color: rgba(118, 151, 178, 0.22);
+      }
+
+      .glyph:nth-child(3n):hover {
+        color: rgba(154, 154, 105, 0.23);
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+      color: #766c5d;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0 auto;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 8vw, 5.8rem);
+      line-height: 0.96;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 520px;
+      margin: 24px auto 0;
+      color: #686258;
+      font-size: clamp(0.96rem, 2vw, 1.08rem);
+      line-height: 1.6;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 46px;
+    }
+
+    a {
+      min-width: 168px;
+      padding: 15px 20px;
+      color: #111;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 650;
+      border: 1px solid rgba(17, 17, 17, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.42);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(17, 17, 17, 0.42);
+      background: rgba(255, 255, 255, 0.72);
+      outline: none;
+    }
+
+    .authors {
+      margin-top: 36px;
+      color: #777066;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 560px) {
+      body {
+        place-items: center;
+        padding: 24px 18px;
+      }
+
+      .glyph:nth-child(1) {
+        top: 5%;
+        left: -7%;
+        font-size: 6rem;
+      }
+
+      .glyph:nth-child(2) {
+        top: 9%;
+        right: -4%;
+        font-size: 5rem;
+      }
+
+      .glyph:nth-child(3) {
+        bottom: 8%;
+        left: -5%;
+        font-size: 5.8rem;
+      }
+
+      .glyph:nth-child(4) {
+        right: -7%;
+        bottom: 12%;
+        font-size: 7rem;
+      }
+
+      .glyph:nth-child(5),
+      .glyph:nth-child(6),
+      .glyph:nth-child(7),
+      .glyph:nth-child(8),
+      .glyph:nth-child(9),
+      .glyph:nth-child(10),
+      .glyph:nth-child(11),
+      .glyph:nth-child(12),
+      .glyph:nth-child(13),
+      .glyph:nth-child(14) {
+        display: none;
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+        font-size: 0.68rem;
+      }
+
+      h1 {
+        font-size: clamp(2.45rem, 14vw, 4.1rem);
+      }
+
+      .subtitle {
+        max-width: 24rem;
+        margin-top: 16px;
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
+      .links {
+        display: grid;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      a {
+        width: min(100vw - 36px, 340px);
+        padding: 13px 18px;
+        font-size: 0.92rem;
+      }
+
+      .authors {
+        max-width: 21rem;
+        margin: 24px auto 0;
+        font-size: 0.78rem;
+        line-height: 1.6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="language-art" aria-hidden="true">
+    <span class="glyph">अ</span>
+    <span class="glyph">ع</span>
+    <span class="glyph">言</span>
+    <span class="glyph">A</span>
+    <span class="glyph">भाषा</span>
+    <span class="glyph">lang</span>
+    <span class="glyph">తెలుగు</span>
+    <span class="glyph">語</span>
+    <span class="glyph">ಕ</span>
+    <span class="glyph">ñ</span>
+    <span class="glyph">हिं</span>
+    <span class="glyph">λ</span>
+    <span class="glyph">ا</span>
+    <span class="glyph">தமிழ்</span>
+  </div>
+
+  <main>
+    <p class="eyebrow">ML Surprise Test - 3</p>
+    <h1>Automated Language Detection</h1>
+    <p class="subtitle">A machine learning approach to natural language identification.</p>
+
+    <nav class="links" aria-label="Project links">
+      <a href="https://github.com/botl9">Source Code</a>
+      <a href="#">Live Demo</a>
+      <a href="#">Data Visualizations</a>
+    </nav>
+
+    <p class="authors">Mohammed Ufraan &nbsp;/&nbsp; Faheem Ahmed &nbsp;/&nbsp; Shaik Mohd Abrar</p>
+  </main>
+</body>
+</html>
