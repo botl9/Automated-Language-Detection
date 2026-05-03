@@ -250,7 +250,9 @@
       min-width: 168px;
       padding: 15px 20px;
       color: #111;
-      text-decoration: none;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
       font-size: 0.95rem;
       font-weight: 650;
       border: 1px solid rgba(17, 17, 17, 0.16);
@@ -272,6 +274,30 @@
       color: #777066;
       font-size: 0.82rem;
       line-height: 1.7;
+    }
+
+    .paper-footer {
+      display: inline-block;
+      margin-top: 38px;
+      min-width: 0;
+      padding: 0;
+      color: #9a9388;
+      font-size: 0.72rem;
+      font-weight: 400;
+      text-decoration: none;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      transition: color 160ms ease;
+    }
+
+    .paper-footer:hover,
+    .paper-footer:focus-visible {
+      color: #7b746a;
+      transform: none;
+      border: 0;
+      background: transparent;
+      outline: none;
     }
 
     @media (max-width: 560px) {
@@ -380,10 +406,11 @@
     <nav class="links" aria-label="Project links">
       <a href="https://github.com/botl9/Automated-Language-Detection" target="_blank">Source Code</a>
       <a href="https://ml-st3-152-148-172.streamlit.app/" target="_blank">Live Demo</a>
-      <a href="visualizations.html">Data Visualizations</a>
+      <a href="visualizations">Data Visualizations</a>
     </nav>
 
     <p class="authors">Mohammed Ufraan &nbsp;/&nbsp; Faheem Ahmed &nbsp;/&nbsp; Shaik Mohd Abrar</p>
+    <a class="paper-footer" href="assets/paper/language-detection.pdf" target="_blank">view documentation paper</a>
   </main>
 </body>
 </html>

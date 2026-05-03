@@ -139,6 +139,24 @@
       border-bottom: 1px solid rgba(140, 113, 62, 0.35);
     }
 
+    footer {
+      margin-top: 54px;
+      text-align: center;
+    }
+
+    .paper-footer {
+      color: #9a9388;
+      font-size: 0.72rem;
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .paper-footer:hover,
+    .paper-footer:focus-visible {
+      color: #7b746a;
+      outline: none;
+    }
+
     @media (max-width: 760px) {
       main {
         width: min(100% - 28px, 560px);
@@ -163,7 +181,7 @@
 <body>
   <main>
     <div class="top">
-      <a class="back" href="index.html">← Home</a>
+      <a class="back" href="./">← Home</a>
       <a href="https://github.com/botl9/Automated-Language-Detection" target="_blank">GitHub</a>
     </div>
 
@@ -216,6 +234,10 @@
         </div>
       </article>
     </section>
+
+    <footer>
+      <a class="paper-footer" href="assets/paper/language-detection.pdf" target="_blank">view documentation paper</a>
+    </footer>
   </main>
 </body>
 </html>
