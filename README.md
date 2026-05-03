@@ -15,6 +15,7 @@ The model provides high-precision identification for common languages. In indust
 * `language_detection_system.ipynb`: Complete Jupyter Notebook with data cleaning, training, and evaluation.
 * `dataset/language-detection.csv`: The labeled language dataset sourced from Wikipedia.
 * `web/`: Minimal project link page for source code, live demo, and data visualizations.
+* `streamlit_app/`: Interactive Streamlit demo for language prediction.
 
 ## Requirements
 * Python 3.x
@@ -22,3 +23,19 @@ The model provides high-precision identification for common languages. In indust
 * scikit-learn
 * matplotlib
 * seaborn
+* streamlit
+
+## Running the Live Demo
+Install the Streamlit app requirements:
+
+```bash
+pip install -r streamlit_app/requirements.txt
+```
+
+Run the demo:
+
+```bash
+streamlit run streamlit_app/app.py
+```
+
+The app trains the same TF-IDF character n-gram and Multinomial Naive Bayes pipeline from the dataset, then lets users enter text and view the predicted language with confidence scores.
